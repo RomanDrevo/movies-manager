@@ -9,12 +9,12 @@
         <td>{{ mov.imdb_url }}</td>
         <td>{{ mov.imdb_rank }}</td>
         <td>
-            <button type="button" class="btn-xs btn-success" @click="">
+            <button type="button" class="btn-xs btn-success" @click.prervent="showEditMovieModal">
                 Edit
             </button>
 
 
-            <button type="button" class="btn-xs btn-danger" @click.prevent="showDeleteModal">
+            <button type="button" class="btn-xs btn-danger" @click.prevent="showDeleteMovieModal">
                 Delete
             </button>
         </td>
@@ -39,8 +39,12 @@
             }
         },
         methods:{
-            showDeleteModal(){
-                this.$emit('showModal', this.mov, this.ind)
+            showDeleteMovieModal(){
+                this.$emit('showDeleteMovieModal', this.mov, this.ind)
+            },
+
+            showEditMovieModal(){
+                this.$emit('showEditMovieModal', this.mov, this.ind)
             }
         },
         components:{

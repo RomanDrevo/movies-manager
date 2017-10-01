@@ -15,16 +15,25 @@
             </tr>
             </thead>
             <tbody>
-            <movie-row v-for="(movie, index) in movies" :key="index" :mov="movie" :ind="index" @showModal="showMovieModal"></movie-row>
+            <movie-row v-for="(movie, index) in movies" :key="index" :mov="movie" :ind="index" @showDeleteMovieModal="showDeleteMovieModal" @showEditMovieModal="showEditMovieModal"></movie-row>
             </tbody>
         </table>
 
-        <modal v-if="showModal" @confirm="deleteMovie(selectedMovie.id, selectedMovieIndex)" @close="showModal = false" width="600">
+        <modal v-if="showDeleteModal" @confirm="deleteMovie(selectedMovie.id, selectedMovieIndex)" @close="showDeleteModal = false" width="600">
             <h3 slot="header">
 
             </h3>
             <div class="form-group" slot="body">
                 You are about to delete the movie record. Are you sure?
+            </div>
+        </modal>
+
+        <modal v-if="showEditModal" @confirm="" @close="showEditModal = false" width="600">
+            <h3 slot="header">
+
+            </h3>
+            <div class="form-group" slot="body">
+                You are about to EDIT the movie record. Are you sure?
             </div>
         </modal>
     </div>
@@ -36,7 +45,8 @@
        data(){
            return {
                movies: [],
-               showModal: false,
+               showDeleteModal: false,
+               showEditModal: false,
                selectedMovie: {},
                selectedMovieIndex: ""
            }
@@ -58,12 +68,16 @@
                             console.log(response);
                         });
 
-                this.showModal = false;
+                this.showDeleteModal = false;
            },
-           showMovieModal(movie, index){
-               this.showModal = true;
+           showDeleteMovieModal(movie, index){
+               this.showDeleteModal = true;
                this.selectedMovie = movie;
                this.selectedMovieIndex = index;
+           },
+
+           showEditMovieModal(movie, index){
+               this.showEditModal = true;
            }
        },
 
