@@ -9,6 +9,14 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import VueResource from 'vue-resource';
+
+import Modal from './components/Modal.vue';
+import MovieRow from './components/MovieRow.vue';
+
+Vue.use(VueResource);
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -17,6 +25,9 @@ window.Vue = require('vue');
 
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('movie', require('./components/Movies.vue'));
+Vue.component('modal', require ('./components/Modal.vue'));
+Vue.component('movie-row', require ('./components/MovieRow.vue'));
+
 
 const app = new Vue({
     el: '#app'

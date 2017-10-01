@@ -15,7 +15,7 @@ class MovieController extends Controller
 //    }
 
     public function getList(){
-        $movies = Movie::all();
+        $movies = Movie::orderBy('updated_at', 'desc')->get();
 
         return Response::json([
             'data' => $movies->toArray()
@@ -72,7 +72,9 @@ class MovieController extends Controller
         $movie->created_at = Carbon::now();
         $movie->save();
 
-        return Response::json('OK. Movie has been created.', 200);
+//        return Response::json('OK. Movie has been created.', 200);
+
+        return view('create');
 
     }
 
@@ -87,9 +89,9 @@ class MovieController extends Controller
         return Response::json('OK. Movie has been updated.', 200);
     }
 
-    public function deleteRecord($id){
+    public function deleteRecord(Request $request){
 
-        $movie = Movie::find($id);
+        $movie = Movie::find($request->movieId);
 
         if(!$movie){
             return Response::json([
