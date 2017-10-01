@@ -44,7 +44,7 @@
             },
 
             showEditMovieModal(){
-                this.$emit('showEditMovieModal', this.mov, this.ind)
+                this.$emit('showEditMovieModal', this.mov)
             }
         },
         components:{

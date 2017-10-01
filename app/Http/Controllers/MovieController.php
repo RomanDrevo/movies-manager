@@ -84,6 +84,8 @@ class MovieController extends Controller
     }
 
     public function updateRecord(Request $request, $id){
+
+//        dd($request->all());
         $movie = Movie::find($id);
         $movie->update($request->all());
         return Response::json('OK. Movie has been updated.', 200);

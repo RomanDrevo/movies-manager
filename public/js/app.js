@@ -44299,7 +44299,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$emit('showDeleteMovieModal', this.mov, this.ind);
         },
         showEditMovieModal: function showEditMovieModal() {
-            this.$emit('showEditMovieModal', this.mov, this.ind);
+            this.$emit('showEditMovieModal', this.mov);
         }
     },
     components: {}
@@ -44572,7 +44572,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -44624,6 +44624,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -44633,7 +44672,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             showDeleteModal: false,
             showEditModal: false,
             selectedMovie: {},
-            selectedMovieIndex: ""
+            selectedMovieIndex: "",
+            title: "",
+            writer: "",
+            director: "",
+            movie_length: "",
+            movie_year: "",
+            description: "",
+            imdb_url: "",
+            imdb_rank: ""
         };
     },
     mounted: function mounted() {
@@ -44656,14 +44703,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
 
             this.showDeleteModal = false;
+            this.selectedMovie = {};
+            this.selectedMovieIndex = '';
         },
         showDeleteMovieModal: function showDeleteMovieModal(movie, index) {
             this.showDeleteModal = true;
             this.selectedMovie = movie;
             this.selectedMovieIndex = index;
         },
-        showEditMovieModal: function showEditMovieModal(movie, index) {
+        editMovie: function editMovie(movieId) {
+
+            var data = {
+                title: this.selectedMovie.title,
+                writer: this.selectedMovie.writer,
+                director: this.selectedMovie.director,
+                movie_length: this.selectedMovie.movie_length,
+                movie_year: this.selectedMovie.movie_year,
+                description: this.selectedMovie.description,
+                imdb_url: this.selectedMovie.imdb_url,
+                imdb_rank: this.selectedMovie.imdb_rank
+            };
+
+            this.$http.post('/api/movies/' + movieId + '/update', this.selectedMovie).then(function (response) {
+                console.log(response);
+            });
+        },
+        showEditMovieModal: function showEditMovieModal(movie) {
             this.showEditModal = true;
+            this.selectedMovie = movie;
+
+            this.title = movie.title;
+            this.writer = movie.writer;
+            this.director = movie.director;
+            this.movie_length = movie.movie_length;
+            this.movie_year = movie.movie_year;
+            this.description = movie.description;
+            this.imdb_url = movie.imdb_url;
+            this.imdb_rank = movie.imdb_rank;
         }
     },
 
@@ -44739,7 +44815,9 @@ var render = function() {
             {
               attrs: { width: "600" },
               on: {
-                confirm: function($event) {},
+                confirm: function($event) {
+                  _vm.editMovie(_vm.selectedMovie.id)
+                },
                 close: function($event) {
                   _vm.showEditModal = false
                 }
@@ -44756,9 +44834,229 @@ var render = function() {
                   slot: "body"
                 },
                 [
-                  _vm._v(
-                    "\n            You are about to EDIT the movie record. Are you sure?\n        "
-                  )
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "title" } }, [
+                      _vm._v("Enter movie title:")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selectedMovie.title,
+                          expression: "selectedMovie.title"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "title" },
+                      domProps: { value: _vm.selectedMovie.title },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.selectedMovie.title = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "writer" } }, [
+                      _vm._v("Enter writer:")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selectedMovie.writer,
+                          expression: "selectedMovie.writer"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "writer" },
+                      domProps: { value: _vm.selectedMovie.writer },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.selectedMovie.writer = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "director" } }, [
+                      _vm._v("Enter movie director:")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selectedMovie.director,
+                          expression: "selectedMovie.director"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "director" },
+                      domProps: { value: _vm.selectedMovie.director },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.selectedMovie.director = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "length" } }, [
+                      _vm._v("Enter movie length:")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selectedMovie.movie_length,
+                          expression: "selectedMovie.movie_length"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "number", id: "length" },
+                      domProps: { value: _vm.selectedMovie.movie_length },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.selectedMovie.movie_length = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "title" } }, [
+                      _vm._v("Enter movie year:")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selectedMovie.movie_year,
+                          expression: "selectedMovie.movie_year"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "number", id: "year" },
+                      domProps: { value: _vm.selectedMovie.movie_year },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.selectedMovie.movie_year = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "description" } }, [
+                      _vm._v("Enter movie description:")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selectedMovie.description,
+                          expression: "selectedMovie.description"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "description" },
+                      domProps: { value: _vm.selectedMovie.description },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.selectedMovie.description = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "imdb_url" } }, [
+                      _vm._v("Enter movie IMDB Link:")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selectedMovie.imdb_url,
+                          expression: "selectedMovie.imdb_url"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "imdb_url" },
+                      domProps: { value: _vm.selectedMovie.imdb_url },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.selectedMovie.imdb_url = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "imdb_rank" } }, [
+                      _vm._v("Enter movie IMDB Rank:")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selectedMovie.imdb_rank,
+                          expression: "selectedMovie.imdb_rank"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "number", id: "imdb_rank" },
+                      domProps: { value: _vm.selectedMovie.imdb_rank },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.selectedMovie.imdb_rank = $event.target.value
+                        }
+                      }
+                    })
+                  ])
                 ]
               )
             ]
