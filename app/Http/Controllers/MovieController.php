@@ -14,9 +14,16 @@ class MovieController extends Controller
 //        $this->middleware('auth');
 //    }
 
-    public function getList(){
+    public function getList(Request $request){
 
-        $movies = Movie::orderBy('updated_at', 'desc')->paginate(10);
+        $movies = Movie::where(function ($query) use ($request) {
+            if ($request->has("keyword")) {
+                $query->where("title", "LIKE", "%" . $request->keyword . "%")
+                    ->orWhere("writer", "LIKE", "%" . $request->keyword . "%")
+                    ->orWhere("director", "LIKE", "%" . $request->keyword . "%")
+                    ->orWhere("description", "LIKE", "%" . $request->keyword . "%");
+            }
+        })->orderBy('updated_at', 'desc')->paginate(10);
 
         return Response::json([
             'data' => $movies->toArray()

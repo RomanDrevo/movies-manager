@@ -29,7 +29,7 @@
 </template>
 
 
-<script>
+<script type="text/babel">
 
     export default {
         props: ["current_page", "prev_page_url", "last_page", "next_page_url", "url_path", "total", "name", "per_page", "updateRecords"],
@@ -49,25 +49,41 @@
             }
         },
         computed : {
-            from: function () {
-                if (this.current_page == 1 && this.total != 0) {
-                    return this.from = 1;
-                }
-                if(this.total == 0) {
-                    return this.from = 0;
-                }
+            from: {
+                
+                get: function () {
+                    if (this.current_page == 1 && this.total != 0) {
+                        return this.from = 1;
+                    }
+                    if(this.total == 0) {
+                        return this.from = 0;
+                    }
 
-                return this.from = this.per_page * (this.current_page - 1) + 1
+                    return this.from = this.per_page * (this.current_page - 1) + 1
+                },
+                
+                set: function () {
+                    
+                }
+                
             },
 
-            to: function () {
-                 if (this.current_page == 1 && this.total > this.per_page) {
-                    return this.to = this.per_page;
+            to: {
+                
+                get: function () {
+                    if (this.current_page == 1 && this.total > this.per_page) {
+                        return this.to = this.per_page;
+                    }
+                    if(this.total < this.per_page) {
+                        return this.to = this.total;
+                    }
+                    return this.to = this.per_page * this.current_page; 
+                },
+                
+                set: function () {
+                    
                 }
-                if(this.total < this.per_page) {
-                    return this.to = this.total;
-                }
-                return this.to = this.per_page * this.current_page;
+                 
             }
         }
 

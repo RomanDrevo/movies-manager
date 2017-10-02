@@ -1,9 +1,25 @@
 <template>
     <div>
         <div class="row search-bar">
-            <button type="button" class="btn-xs btn-primary" @click.prervent="showAddMovieModal = true">
-                Add New Movie
-            </button>
+            <div class="col-sm-5">
+                <button type="button" class="btn-xs btn-primary" @click.prervent="showAddMovieModal = true">
+                    Add New Movie
+                </button>
+            </div>
+
+            <div class="col-sm-7">
+                <form @submit.prevent="getSearchResults" class="form-inline" id="filter-form">
+
+                    <input class="form-control" type="text" v-model="keyword" @input="getSearchResults">
+                    <div class="form-group">
+                        <button class="btn-xs btn-success" type="submit">Search</button>
+                    </div>
+                    <button v-if="isSearched" class="btn-xs btn-default" @click.prevent="reload">Refresh</button>
+                </form>
+            </div>
+
+
+
         </div>
 
 
@@ -142,6 +158,8 @@
     export default {
        data(){
            return {
+               keyword: "",
+               isSearched: false,
                moviesData:{},
                movies: [],
                newMovie:{
@@ -200,7 +218,7 @@
            deleteMovie(movieId, index){
                 this.$http.post('/api/movies/' + movieId + '/delete', {movieId: movieId})
                         .then(response => {
-                            this.movies.splice(index, 1);
+                            this.movies.data.splice(index, 1);
                             console.log(response);
                         });
 
@@ -245,7 +263,23 @@
 
                this.showAddMovieModal = false;
 
-               this.movies.unshift(this.newMovie)
+               this.movies.data.unshift(this.newMovie)
+           },
+
+           getSearchResults() {
+
+               let keyword = this.keyword;
+
+               let tempUrl = '/api/movies/get-movies?keyword=' + keyword;
+
+               this.getMovies(tempUrl);
+               this.isSearched = true;
+           },
+
+           reload(){
+               this.getMovies('/api/movies/get-movies');
+               this.isSearched = false;
+               this.keyword = '';
            }
        },
 
