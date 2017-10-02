@@ -209,7 +209,6 @@
            getMovies(url){
                this.$http.get(url)
                        .then(response => {
-                           console.log(response.body.data);
                            this.moviesData = response.body.data;
                            this.movies = response.body.data;
                        })
@@ -219,24 +218,34 @@
                 this.$http.post('/api/movies/' + movieId + '/delete', {movieId: movieId})
                         .then(response => {
                             this.movies.data.splice(index, 1);
-                            console.log(response);
+                            this.$swal('Done!');
+                        })
+                        .catch(errors => {
+                            this.$swal("Oops, something went wrong!");
                         });
 
                 this.showDeleteModal = false;
                 this.selectedMovie = {};
                 this.selectedMovieIndex = '';
+
            },
            showDeleteMovieModal(movie, index){
                this.showDeleteModal = true;
                this.selectedMovie = movie;
                this.selectedMovieIndex = index;
+
+
            },
 
            editMovie(movieId){
                this.$http.post('/api/movies/' + movieId + '/update', this.selectedMovie)
                        .then(response => {
-                           console.log(response);
+                           this.$swal('Done!');
+                       })
+                       .catch(errors => {
+                           this.$swal("Oops, something went wrong!");
                        });
+
 
                this.showEditModal = false;
            },

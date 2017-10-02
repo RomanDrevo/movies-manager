@@ -11,12 +11,15 @@ window.Vue = require('vue');
 
 import VueResource from 'vue-resource';
 
+import VueSweetAlert from 'vue-sweetalert';
+
 import Modal from './components/Modal.vue';
 import MovieRow from './components/MovieRow.vue';
 import Pagination from './components/Pagination.vue';
 
 Vue.use(VueResource);
 
+Vue.use(VueSweetAlert);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -34,3 +37,6 @@ Vue.component('pagination', require ('./components/Pagination.vue'));
 const app = new Vue({
     el: '#app'
 });
+
+
+

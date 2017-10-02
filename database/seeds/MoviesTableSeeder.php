@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use Faker\Factory as Faker;
 class MoviesTableSeeder extends Seeder
 {
     /**
@@ -12,226 +13,19 @@ class MoviesTableSeeder extends Seeder
     public function run()
     {
 
-        DB::table('movies')->insert([
-            'title' => 'Point Break',
-            'writer' => 'Rick King',
-            'director' => 'Kathryn Bigelow',
-            'movie_length' => 120,
-            'movie_year' => 1991,
-            'description' => 'An FBI agent goes undercover to catch a gang of surfers who may be bank robbers.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BNWVjZWFmYjItZGJlOC00YTllLWE4YjctMWY2ZTg5ZjE0MDIyXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SY1000_SX675_AL_.jpg',
-            'imdb_rank' => 7.2
-        ]);
+        $faker = Faker::create();
 
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-        DB::table('movies')->insert([
-            'title' => 'Pulp Fiction',
-            'writer' => ' Quentin Tarantino',
-            'director' => ' Quentin Tarantino',
-            'movie_length' => 120,
-            'movie_year' => 1994,
-            'description' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-            'imdb_url' => 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg',
-            'imdb_rank' => 8.9
-        ]);
-
-
+        foreach (range(1, 30) as $index) {
+            \App\Movie::create([
+                'title' => $faker->sentence(2),
+                'writer' => $faker->name,
+                'director' => $faker->name,
+                'movie_length' => $faker->numberBetween(100, 200),
+                'movie_year' => $faker->numberBetween(1956, 2017),
+                'description' => $faker->paragraph(2),
+                'imdb_url' => $faker->url,
+                'imdb_rank' => $faker->numberBetween(1, 9)
+            ]);
+        }
     }
 }

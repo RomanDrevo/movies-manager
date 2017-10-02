@@ -2,12 +2,12 @@
     <div>
         <nav>
             <ul class="pagination">
-                <li class="page-item" :class="current_page == 1 ? 'disabled' : ''">
-                    <a class="page-link" :href="prev_page_url" tabindex="-1" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                </li>
+                <!--<li class="page-item" :class="current_page == 1 ? 'disabled' : ''">-->
+                    <!--<a class="page-link" :href="prev_page_url" tabindex="-1" aria-label="Previous">-->
+                        <!--<span aria-hidden="true">&laquo;</span>-->
+                        <!--<span class="sr-only">Previous</span>-->
+                    <!--</a>-->
+                <!--</li>-->
 
                 <li v-for="number in last_page" class="page-item" :class="current_page == number ? 'active' : ''"
                     v-show="isVisible(number)">
@@ -15,12 +15,12 @@
                         }}</a>
                 </li>
 
-                <li class="page-item" :class="current_page == last_page ? 'disabled' : ''">
-                    <a class="page-link" :href="next_page_url" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </li>
+                <!--<li class="page-item" :class="current_page == last_page ? 'disabled' : ''">-->
+                    <!--<a class="page-link" :href="next_page_url" aria-label="Next">-->
+                        <!--<span aria-hidden="true">&raquo;</span>-->
+                        <!--<span class="sr-only">Next</span>-->
+                    <!--</a>-->
+                <!--</li>-->
             </ul>
             <p>Showing {{ name }} {{ from }} to {{ to }} out of {{ total }}
             </p>

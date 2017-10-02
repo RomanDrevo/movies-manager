@@ -52,20 +52,6 @@ class MovieController extends Controller
     }
 
     public function saveRecord(Request $request){
-//        $movie = Movie::create([
-//            'title' => $request->title,
-//            'writer' => $request->writer,
-//            'director' => $request->director,
-//            'movie_length' => $request->movie_length,
-//            'movie_year' => $request->movie_year,
-//            'description' => $request->description,
-//            'imdb_url' => $request->imdb_url,
-//            'imdb_rank' => $request->imdb_rank
-//
-//        ]);
-
-//        dd($request->all());
-
 
         $movie = new Movie();
 
@@ -78,11 +64,19 @@ class MovieController extends Controller
         $movie->imdb_url = $request->imdb_url;
         $movie->imdb_rank = $request->imdb_rank;
         $movie->created_at = Carbon::now();
-        $movie->save();
 
-//        return Response::json('OK. Movie has been created.', 200);
+        if($movie->save()){
+            return Response::json('OK. Movie has been created.', 200);
+        }else{
+            return Response::json([
+                'error' => [
+                    'message' => 'Can not add a movie.'
+                ]
+            ], 404);
+        }
 
-        return view('create');
+
+
 
     }
 
