@@ -1,23 +1,71 @@
 <template>
     <div>
+        <div class="row search-bar">
+            <button type="button" class="btn-xs btn-primary" @click.prervent="showAddMovieModal = true">
+                Add New Movie
+            </button>
+        </div>
+
+
         <table class="table table-bordered">
             <thead>
             <tr>
                 <th>Title</th>
                 <th>Writer</th>
-                <th>Director</th>
-                <th>Length</th>
-                <th>Year</th>
-                <th>Description</th>
-                <th>IMDB Link</th>
-                <th>IMDB Rank</th>
-                <th>Edit/Delete</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
-            <movie-row v-for="(movie, index) in movies" :key="index" :mov="movie" :ind="index" @showDeleteMovieModal="showDeleteMovieModal" @showEditMovieModal="showEditMovieModal"></movie-row>
+            <movie-row v-for="(movie, index) in movies.data" :key="index" :mov="movie" :ind="index" @showDeleteMovieModal="showDeleteMovieModal" @showEditMovieModal="showEditMovieModal"></movie-row>
             </tbody>
         </table>
+
+        <modal v-if="showAddMovieModal" @confirm="addMovie" @close="showAddMovieModal = false" width="600">
+            <h3 slot="header">
+
+            </h3>
+            <div class="form-group" slot="body">
+                <div class="form-group">
+                    <label>Enter movie title:</label>
+                    <input type="text" v-model="newMovie.title" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="writer">Enter writer:</label>
+                    <input type="text" v-model="newMovie.writer" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="director">Enter movie director:</label>
+                    <input type="text" v-model="newMovie.director" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="length">Enter movie length:</label>
+                    <input type="number" v-model="newMovie.movie_length" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Enter movie year:</label>
+                    <input type="number" v-model="newMovie.movie_year" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Enter movie description:</label>
+                    <textarea rows="4" v-model="newMovie.description" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="imdb_url">Enter movie IMDB Link:</label>
+                    <input type="text" v-model="newMovie.imdb_url" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="imdb_rank">Enter movie IMDB Rank:</label>
+                    <input type="number" v-model="newMovie.imdb_rank" class="form-control">
+                </div>
+            </div>
+        </modal>
 
         <modal v-if="showDeleteModal" @confirm="deleteMovie(selectedMovie.id, selectedMovieIndex)" @close="showDeleteModal = false" width="600">
             <h3 slot="header">
@@ -60,7 +108,7 @@
 
                 <div class="form-group">
                     <label for="description">Enter movie description:</label>
-                    <input type="text" v-model="selectedMovie.description" id="description" class="form-control">
+                    <textarea rows="4" v-model="selectedMovie.description" id="description" class="form-control"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -75,6 +123,17 @@
 
             </div>
         </modal>
+
+        <pagination :current_page="moviesData.current_page"
+                    :prev_page_url="moviesData.prev_page_url"
+                    :last_page="moviesData.last_page"
+                    :next_page_url="moviesData.next_page_url"
+                    :url_path="url"
+                    :total="moviesData.total"
+                    name="movies.data"
+                    :per_page="moviesData.per_page"
+                    :updateRecords="updateRecords">
+        </pagination>
     </div>
 </template>
 
@@ -83,9 +142,21 @@
     export default {
        data(){
            return {
+               moviesData:{},
                movies: [],
+               newMovie:{
+                   title: "",
+                   writer: "",
+                   director: "",
+                   movie_length: "",
+                   movie_year: "",
+                   description: "",
+                   imdb_url: "",
+                   imdb_rank: ""
+               },
                showDeleteModal: false,
                showEditModal: false,
+               showAddMovieModal: false,
                selectedMovie: {},
                selectedMovieIndex: "",
                title: "",
@@ -100,14 +171,32 @@
        },
 
        mounted(){
-            this.$http.get('/api/movies')
-                    .then(response => {
-                        console.log(response.body.data);
-                        this.movies = response.body.data;
-                    })
+            this.getMovies('/api/movies/get-movies')
        },
 
+        computed: {
+            url() {
+                let tempUrl = "/api/movies/get-movies";
+                return this.type ? tempUrl + "?type=" + this.type + "&" : tempUrl + "?";
+            }
+        },
+
        methods: {
+
+           updateRecords(e){
+               let httpPath = e.target.getAttribute("href");
+               this.getMovies(httpPath);
+           },
+
+           getMovies(url){
+               this.$http.get(url)
+                       .then(response => {
+                           console.log(response.body.data);
+                           this.moviesData = response.body.data;
+                           this.movies = response.body.data;
+                       })
+           },
+
            deleteMovie(movieId, index){
                 this.$http.post('/api/movies/' + movieId + '/delete', {movieId: movieId})
                         .then(response => {
@@ -126,22 +215,12 @@
            },
 
            editMovie(movieId){
-
-               let data = {
-                   title: this.selectedMovie.title,
-                   writer: this.selectedMovie.writer,
-                   director: this.selectedMovie.director,
-                   movie_length: this.selectedMovie.movie_length,
-                   movie_year: this.selectedMovie.movie_year,
-                   description: this.selectedMovie.description,
-                   imdb_url: this.selectedMovie.imdb_url,
-                   imdb_rank: this.selectedMovie.imdb_rank
-               };
-
                this.$http.post('/api/movies/' + movieId + '/update', this.selectedMovie)
                        .then(response => {
                            console.log(response);
                        });
+
+               this.showEditModal = false;
            },
 
            showEditMovieModal(movie){
@@ -156,6 +235,17 @@
                this.description = movie.description;
                this.imdb_url = movie.imdb_url;
                this.imdb_rank = movie.imdb_rank;
+           },
+
+           addMovie(){
+               this.$http.post('/api/movies/store', this.newMovie)
+                       .then(response => {
+                           console.log(response);
+                       });
+
+               this.showAddMovieModal = false;
+
+               this.movies.unshift(this.newMovie)
            }
        },
 
@@ -166,5 +256,7 @@
 </script>
 
 <style scoped>
-
+.search-bar{
+    margin: 1%;
+}
 </style>

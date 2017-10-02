@@ -15,7 +15,8 @@ class MovieController extends Controller
 //    }
 
     public function getList(){
-        $movies = Movie::orderBy('updated_at', 'desc')->get();
+
+        $movies = Movie::orderBy('updated_at', 'desc')->paginate(10);
 
         return Response::json([
             'data' => $movies->toArray()
@@ -57,7 +58,7 @@ class MovieController extends Controller
 //        ]);
 
 //        dd($request->all());
-//        dd($request->all());
+
 
         $movie = new Movie();
 
@@ -85,9 +86,19 @@ class MovieController extends Controller
 
     public function updateRecord(Request $request, $id){
 
-//        dd($request->all());
         $movie = Movie::find($id);
-        $movie->update($request->all());
+
+        $movie->title = $request->title;
+        $movie->writer = $request->writer;
+        $movie->director = $request->director;
+        $movie->movie_length = $request->movie_length;
+        $movie->movie_year = $request->movie_year;
+        $movie->description = $request->description;
+        $movie->imdb_url = $request->imdb_url;
+        $movie->imdb_rank = $request->imdb_rank;
+        $movie->created_at = Carbon::now();
+        $movie->save();
+
         return Response::json('OK. Movie has been updated.', 200);
     }
 

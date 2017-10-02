@@ -13,6 +13,7 @@ import VueResource from 'vue-resource';
 
 import Modal from './components/Modal.vue';
 import MovieRow from './components/MovieRow.vue';
+import Pagination from './components/Pagination.vue';
 
 Vue.use(VueResource);
 
@@ -27,6 +28,7 @@ Vue.component('example', require('./components/Example.vue'));
 Vue.component('movie', require('./components/Movies.vue'));
 Vue.component('modal', require ('./components/Modal.vue'));
 Vue.component('movie-row', require ('./components/MovieRow.vue'));
+Vue.component('pagination', require ('./components/Pagination.vue'));
 
 
 const app = new Vue({

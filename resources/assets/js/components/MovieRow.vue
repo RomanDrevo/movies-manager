@@ -2,15 +2,9 @@
     <tr>
         <td>{{ mov.title }}</td>
         <td>{{ mov.writer }}</td>
-        <td>{{ mov.director }}</td>
-        <td>{{ mov.movie_length }}</td>
-        <td>{{ mov.movie_year }}</td>
-        <td>{{ mov.description }}</td>
-        <td>{{ mov.imdb_url }}</td>
-        <td>{{ mov.imdb_rank }}</td>
         <td>
             <button type="button" class="btn-xs btn-success" @click.prervent="showEditMovieModal">
-                Edit
+                More Details/Edit
             </button>
 
 
