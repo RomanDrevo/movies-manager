@@ -7,18 +7,13 @@
                 </button>
             </div>
 
-            <div class="col-sm-7">
-                <form @submit.prevent="getSearchResults" class="form-inline" id="filter-form">
-
+            <div class="col-sm-4">
+                <label>
+                    Search by keyword:
                     <input class="form-control" type="text" v-model="keyword" @input="getSearchResults">
-                    <div class="form-group">
-                        <button class="btn-xs btn-success" type="submit">Search</button>
-                    </div>
+                </label>
                     <button v-if="isSearched" class="btn-xs btn-default" @click.prevent="reload">Refresh</button>
-                </form>
             </div>
-
-
 
         </div>
 
