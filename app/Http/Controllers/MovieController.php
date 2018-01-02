@@ -14,8 +14,16 @@ class MovieController extends Controller
 //        $this->middleware('auth');
 //    }
 
-    public function getList(){
-        $movies = Movie::all();
+    public function getList(Request $request){
+
+        $movies = Movie::where(function ($query) use ($request) {
+            if ($request->has("keyword")) {
+                $query->where("title", "LIKE", "%" . $request->keyword . "%")
+                    ->orWhere("writer", "LIKE", "%" . $request->keyword . "%")
+                    ->orWhere("director", "LIKE", "%" . $request->keyword . "%")
+                    ->orWhere("description", "LIKE", "%" . $request->keyword . "%");
+            }
+        })->orderBy('updated_at', 'desc')->paginate(10);
 
         return Response::json([
             'data' => $movies->toArray()
@@ -44,20 +52,6 @@ class MovieController extends Controller
     }
 
     public function saveRecord(Request $request){
-//        $movie = Movie::create([
-//            'title' => $request->title,
-//            'writer' => $request->writer,
-//            'director' => $request->director,
-//            'movie_length' => $request->movie_length,
-//            'movie_year' => $request->movie_year,
-//            'description' => $request->description,
-//            'imdb_url' => $request->imdb_url,
-//            'imdb_rank' => $request->imdb_rank
-//
-//        ]);
-
-//        dd($request->all());
-//        dd($request->all());
 
         $movie = new Movie();
 
@@ -70,9 +64,19 @@ class MovieController extends Controller
         $movie->imdb_url = $request->imdb_url;
         $movie->imdb_rank = $request->imdb_rank;
         $movie->created_at = Carbon::now();
-        $movie->save();
 
-        return Response::json('OK. Movie has been created.', 200);
+        if($movie->save()){
+            return Response::json('OK. Movie has been created.', 200);
+        }else{
+            return Response::json([
+                'error' => [
+                    'message' => 'Can not add a movie.'
+                ]
+            ], 404);
+        }
+
+
+
 
     }
 
@@ -82,14 +86,26 @@ class MovieController extends Controller
     }
 
     public function updateRecord(Request $request, $id){
+
         $movie = Movie::find($id);
-        $movie->update($request->all());
+
+        $movie->title = $request->title;
+        $movie->writer = $request->writer;
+        $movie->director = $request->director;
+        $movie->movie_length = $request->movie_length;
+        $movie->movie_year = $request->movie_year;
+        $movie->description = $request->description;
+        $movie->imdb_url = $request->imdb_url;
+        $movie->imdb_rank = $request->imdb_rank;
+        $movie->created_at = Carbon::now();
+        $movie->save();
+
         return Response::json('OK. Movie has been updated.', 200);
     }
 
-    public function deleteRecord($id){
+    public function deleteRecord(Request $request){
 
-        $movie = Movie::find($id);
+        $movie = Movie::find($request->movieId);
 
         if(!$movie){
             return Response::json([

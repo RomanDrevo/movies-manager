@@ -16,8 +16,13 @@
 
                     <movie></movie>
                 </div>
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
             </div>
-        </div>
+        @endif
+
+        <movie></movie>
     </div>
 </div>
 @endsection
