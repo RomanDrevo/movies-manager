@@ -34,6 +34,9 @@
         <modal v-if="showAddMovieModal" @confirm="addMovie" @close="showAddMovieModal = false" width="600">
             <h3 slot="header">
                 Header!!!
+                Header2
+                Header3
+                Header4
             </h3>
             <div class="form-group" slot="body">
                 <div class="form-group">
