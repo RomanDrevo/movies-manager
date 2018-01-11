@@ -22,7 +22,6 @@
             </div>
         @endif
 
-        <movie></movie>
     </div>
 </div>
 @endsection
