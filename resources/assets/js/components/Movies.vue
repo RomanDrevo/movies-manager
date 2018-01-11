@@ -145,6 +145,8 @@
                     :per_page="moviesData.per_page"
                     :updateRecords="updateRecords">
         </pagination>
+
+        <h1>Footer</h1>
     </div>
 </template>
 
